@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController("/pokemon")
 public class PokeController {
 
     private final PokemonService pokemonService;
@@ -27,12 +27,12 @@ public class PokeController {
         return pokemonService.getPokemonById(pokemonId);
     }
 
-    @PostMapping("/")
+    @PostMapping("/createPokemon")
     public void createPokemon(@RequestBody Pokemon pokemon) {
         pokemonService.createNewPokemon(pokemon);
     }
 
-    @PutMapping("/")
+    @PutMapping("/upgradePokemon")
     public void upgradePokemon(@RequestBody Pokemon pokemon) {
         pokemonService.createNewPokemon(pokemon);
     }

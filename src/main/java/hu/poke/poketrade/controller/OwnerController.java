@@ -1,13 +1,14 @@
 package hu.poke.poketrade.controller;
 
 import hu.poke.poketrade.controller.param.Owner;
+import hu.poke.poketrade.controller.param.PokeTradeParam;
 import hu.poke.poketrade.service.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController("/owner")
 public class OwnerController {
 
     private final OwnerService ownerService;
@@ -17,7 +18,7 @@ public class OwnerController {
         this.ownerService = ownerService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/owners")
     public List<Owner> getOwners() {
         return ownerService.getOwners();
     }
@@ -30,6 +31,12 @@ public class OwnerController {
     @PostMapping("/")
     public void createOwner(@RequestBody Owner owner) {
         ownerService.createNewOwner(owner);
+    }
+
+    @PostMapping("/pokeTrade")
+    public void pokeTrade(@RequestBody PokeTradeParam pokeTradeParam) {
+        ownerService.doTradePokemon(pokeTradeParam.getFirstOwnerId(), pokeTradeParam.getFirstPokemonId(),
+                pokeTradeParam.getOtherOwnerId(), pokeTradeParam.getOtherPokemonId());
     }
 
 }
